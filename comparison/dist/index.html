@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Listen to the same passage of Tchaikovsky's Capriccio italien in two performances. Compare the original and a timing-adjusted reference side by side.">
+  <meta name="theme-color" content="#ffffff">
+  <title>Capriccio · Listening Room</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<main>
+  <header><a class="brand" href="./">Music comparison</a><button id="share" class="quiet">Copy share link <span aria-hidden="true">↗</span></button></header>
+  <section class="intro"><p class="eyebrow">A CLASSICAL MUSIC COMPARISON</p><h1>Capriccio, side by side.</h1><p class="subtitle">Pyotr Ilyich Tchaikovsky <span>·</span> Capriccio italien, Op. 45</p><p class="lead">One passage, two performances. Switch between them as they play, or listen to both together.</p></section>
+
+  <section class="players" aria-label="Side by side video comparison">
+    <article class="player-card" id="card-a">
+      <div class="card-heading"><span class="letter">A</span><div><h2>The concert</h2><p>Frankfurt Radio Symphony · Alain Altinoglu</p></div><span class="tag">55:59</span></div>
+      <div class="video-wrap"><video id="original" controls playsinline preload="metadata" poster="media/original.jpg" aria-label="Original concert excerpt at 55 minutes 59 seconds"><source src="media/original.mp4" type="video/mp4"></video></div>
+      <div class="card-footer"><button class="listen selected" data-audio="a" aria-pressed="true"><span class="sound-dot"></span> Listen to A</button><a href="https://www.youtube.com/watch?v=R4MMZt_1sQg&t=3359s" target="_blank" rel="noopener">YouTube source ↗</a></div>
+    </article>
+    <article class="player-card" id="card-b">
+      <div class="card-heading"><span class="letter">B</span><div><h2>The reference</h2><p>Frankfurt Radio Symphony · Ivan Repušic</p></div><span class="tag">06:17.6</span></div>
+      <div class="video-wrap"><video id="reference" controls playsinline preload="metadata" poster="media/reference.jpg" muted aria-label="Reference performance with selected pitch and speed adjustment"><source src="media/reference-adjusted.mp4" type="video/mp4"></video><span class="video-badge" id="video-badge">TIMING ADJUSTED</span></div>
+      <div class="card-footer"><button class="listen" data-audio="b" aria-pressed="false"><span class="sound-dot"></span> Listen to B</button><a href="https://www.youtube.com/watch?v=NMvFoCqdZHc&t=377.6s" target="_blank" rel="noopener">YouTube source ↗</a></div>
+    </article>
+  </section>
+
+  <section class="transport" aria-label="Linked playback controls">
+    <div class="transport-top"><div class="play-actions"><button id="play" class="primary"><span id="play-icon" aria-hidden="true">▶</span> <span id="play-label">Play together</span></button><button id="restart" class="icon-button" aria-label="Restart both videos">↺</button></div><div class="audio-choices" aria-label="Audible video"><span>LISTEN</span><button data-audio="a" class="selected" aria-pressed="true">A</button><button data-audio="b" aria-pressed="false">B</button><button data-audio="both" aria-pressed="false">Both</button></div><output id="time">00:00 / 00:20</output></div>
+    <label class="sr-only" for="timeline">Shared playback position</label><input id="timeline" type="range" min="0" max="20" step="0.01" value="0"><p class="hint">Use A and B to switch what you hear without losing your place. Each video also has its own controls.</p>
+  </section>
+
+  <section class="adjustments" aria-labelledby="adjustment-title">
+    <div class="adjustment-intro"><p class="eyebrow">MAKE THE COMPARISON YOURSELF</p><h2 id="adjustment-title">Fine-tune the reference.</h2><p>The measured fit uses the same key and a small speed increase. You can hear the untouched version or try a different adjustment.</p><button id="reset" class="text-button">Reset to measured fit ↺</button></div>
+    <div class="adjustment-controls">
+      <div class="mode-switch" role="group" aria-label="Reference version"><button id="matched-mode" class="selected" aria-pressed="true">Measured fit</button><button id="raw-mode" aria-pressed="false">Untouched reference</button></div>
+      <div class="control-row"><div class="control-label"><label for="speed">Reference speed</label><output id="speed-value">1.020× <small>+2.0%</small></output></div><input id="speed" type="range" min="0.85" max="1.15" step="0.005" value="1.02"><div class="range-ends"><span>Slower · 0.85×</span><span>Faster · 1.15×</span></div></div>
+      <div class="control-row inline-control"><label for="pitch">Reference pitch</label><select id="pitch"><option value="-2">−2 semitones</option><option value="0" selected>Same key · 0 semitones</option><option value="2">+2 semitones</option></select></div>
+      <div class="control-row"><div class="control-label"><label for="offset">Reference timing nudge</label><output id="offset-value">0.00 s</output></div><input id="offset" type="range" min="-1" max="1" step="0.05" value="0"><div class="range-ends"><span>−1 second</span><span>+1 second</span></div></div>
+    </div>
+  </section>
+
+  <section class="notes"><div><span class="note-number">01</span><h3>Same key</h3><p>The best harmonic match needs no semitone transposition. The pitch options let you test the difference yourself.</p></div><div><span class="note-number">02</span><h3>A small timing adjustment</h3><p>About 20.4 seconds in the reference maps to 20 seconds in the concert. The default speeds the reference up by 2%, preserving its pitch.</p></div><div><span class="note-number">03</span><h3>Different performances</h3><p>Phrasing varies within the passage. A constant speed adjustment is approximate; it cannot remove every difference in rubato.</p></div></section>
+  <details><summary>About the identification and adjustments</summary><p>Three consecutive 20-second concert passages aligned in order to this separate performance of <em>Capriccio italien</em>. The comparison excerpt starts at 55:59 in the concert and approximately 6:17.6 in the reference. The timing estimate comes from harmonic-feature alignment and has a coarse resolution of about 0.2 seconds.</p><p>An earlier recognition stress test raised a copy of the concert excerpt by two semitones and sped it up by about 12%. Those were artificial test settings, not measured differences between these two performances. The default here is 0 semitones and 1.020× reference speed.</p><p>The measured-fit video is rendered with the timing adjustment. Pitch variants are rendered separately with duration compensation. The speed slider preserves pitch through browser time stretching where supported. Both videos remain available via their original YouTube links.</p></details>
+  <footer><span>CAPRICCIO · LISTENING ROOM</span><a href="media/reference-adjusted.mp4" download>Download adjusted reference ↓</a></footer>
+  <p id="status" class="status" role="status" aria-live="polite">Ready. Press Play together to begin.</p>
+</main>
+</body>
+</html>
